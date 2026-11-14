@@ -1,0 +1,165 @@
+[
+  {
+    "group": "AI Companies",
+    "items": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com/news/",
+        "mode": "edition",
+        "note": "No new post opened in this run. The OpenAI story in this edition comes from Benzinga."
+      },
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com/news",
+        "mode": "edition",
+        "note": "Covered in this run through Quartz and VentureBeat; the roadshow announcement is linked as the official source."
+      },
+      {
+        "name": "Google Gemini",
+        "url": "https://blog.google/products/gemini/",
+        "mode": "edition",
+        "note": "Covered in this run through VentureBeat, with Google’s announcement linked."
+      },
+      {
+        "name": "Google DeepMind",
+        "url": "https://deepmind.google/discover/blog/",
+        "mode": "edition",
+        "note": "Not opened again in this run. Stories from November 10 and 11 are kept."
+      },
+      {
+        "name": "Microsoft",
+        "url": "https://blogs.microsoft.com/",
+        "mode": "edition",
+        "note": "Covered in this run through CNN, Bloomberg and Reuters: the Outlook, Teams and Copilot outage."
+      },
+      {
+        "name": "NVIDIA",
+        "url": "https://blogs.nvidia.com/",
+        "mode": "edition",
+        "note": "Covered in this run through TechCrunch and Fortune."
+      },
+      {
+        "name": "Meta AI",
+        "url": "https://ai.meta.com/",
+        "mode": "edition",
+        "note": "No story selected for this edition."
+      },
+      {
+        "name": "Hugging Face",
+        "url": "https://huggingface.co/blog",
+        "mode": "edition",
+        "note": "No story selected for this edition."
+      },
+      {
+        "name": "Harvey",
+        "url": "https://www.harvey.ai/newsroom",
+        "mode": "edition",
+        "note": "No new announcement found in this run. The November 9 story is kept."
+      }
+    ]
+  },
+  {
+    "group": "Technology Publications",
+    "items": [
+      {
+        "name": "TechCrunch",
+        "url": "https://techcrunch.com",
+        "mode": "edition",
+        "note": "Read in this run."
+      },
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com",
+        "mode": "edition",
+        "note": "Not checked in this run."
+      },
+      {
+        "name": "Wired",
+        "url": "https://www.wired.com",
+        "mode": "link",
+        "note": "Search for this site was refused again in this run. Kept as a direct link."
+      },
+      {
+        "name": "MIT Technology Review",
+        "url": "https://www.technologyreview.com",
+        "mode": "edition",
+        "note": "Checked in this run. Nothing newer that fits; the November 9 article is kept."
+      },
+      {
+        "name": "VentureBeat",
+        "url": "https://venturebeat.com",
+        "mode": "edition",
+        "note": "Read in this run: three stories in this edition."
+      }
+    ]
+  },
+  {
+    "group": "Startups & Entrepreneurship",
+    "items": [
+      {
+        "name": "Y Combinator",
+        "url": "https://www.ycombinator.com",
+        "mode": "edition",
+        "note": "Last checked November 13: the latest blog posts were from October 30."
+      },
+      {
+        "name": "Startup Stealth",
+        "url": "https://startupstealth.com",
+        "mode": "link",
+        "note": "Last checked November 13: the site is a sign-up page for a weekly newsletter, with no dated articles to read."
+      },
+      {
+        "name": "Startup Ideas",
+        "url": "https://startup-ideas.com",
+        "mode": "link",
+        "note": "Search returned no pages from this site again in this run."
+      },
+      {
+        "name": "Early Startup Days",
+        "url": "https://www.earlystartupdays.com/subscribe",
+        "mode": "edition",
+        "note": "Last checked November 13: the founder stories found date from 2024."
+      }
+    ]
+  },
+  {
+    "group": "Venture Capital",
+    "items": [
+      {
+        "name": "Andreessen Horowitz (a16z)",
+        "url": "https://a16z.com",
+        "mode": "edition",
+        "note": "Checked in this run. Two essays are in this edition."
+      },
+      {
+        "name": "ApexRound",
+        "url": "https://apexround.com",
+        "mode": "link",
+        "note": "Search returned no pages from this site again in this run."
+      }
+    ]
+  },
+  {
+    "group": "Founders & Business",
+    "items": [
+      {
+        "name": "Simply You Grow",
+        "url": "https://algofirst.co/marketing",
+        "mode": "link",
+        "note": "The linked site is a social marketing agency page with no articles."
+      },
+      {
+        "name": "Business Bulls",
+        "url": "https://www.instagram.com/businessbulls.in/",
+        "mode": "link",
+        "note": "Instagram account. No separate official news website found."
+      },
+      {
+        "name": "Beyond Startup",
+        "url": "https://www.instagram.com/beyondstartup.s/",
+        "mode": "link",
+        "note": "Instagram account. No separate editorial website found."
+      }
+    ]
+  }
+]
