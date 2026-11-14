@@ -1,0 +1,59 @@
+name: Publish The AI Daily
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    # 06:17 São Paulo (UTC-3); may run later during GitHub congestion.
+    - cron: '17 9 * * *'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ai-daily-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download site files
+        uses: actions/checkout@v6
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Collect and prepare news edition
+        run: python scripts/update.py
+      - name: Prepare website-only folder
+        run: |
+          mkdir -p public/data
+          cp index.html public/index.html
+          cp data/edition.js public/data/edition.js
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload public website
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: public
+      - name: Publish website
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Save the daily edition to the repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/edition.js
+          if git diff --cached --quiet; then
+            echo "No changes to save"
+          else
+            git commit -m "Update the daily AI news edition"
+            git push origin HEAD:main
+          fi
