@@ -45,6 +45,7 @@ jobs:
         run: |
           mkdir -p public/data
           cp index.html public/index.html
+          cp apple-touch-icon.png public/apple-touch-icon.png
           cp data/edition.js public/data/edition.js
           if test -s public/audio/today.mp3; then
             echo 'Last successful natural-voice podcast included.'
@@ -112,6 +113,7 @@ jobs:
           test -s data/podcast/episode.json
           mkdir -p public/data
           cp index.html public/index.html
+          cp apple-touch-icon.png public/apple-touch-icon.png
           cp data/edition.js public/data/edition.js
           ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 public/audio/today.mp3
       - name: Save the last good podcast and transcript
