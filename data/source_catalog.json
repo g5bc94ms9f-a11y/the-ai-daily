@@ -6,55 +6,55 @@
         "name": "OpenAI",
         "url": "https://openai.com/news/",
         "mode": "edition",
-        "note": "No new post opened in this run. The OpenAI story in this edition comes from Benzinga."
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
       },
       {
         "name": "Anthropic",
         "url": "https://www.anthropic.com/news",
-        "mode": "edition",
-        "note": "Covered in this run through Quartz and VentureBeat; the roadshow announcement is linked as the official source."
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
       },
       {
         "name": "Google Gemini",
         "url": "https://blog.google/products/gemini/",
         "mode": "edition",
-        "note": "Covered in this run through VentureBeat, with Google’s announcement linked."
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
       },
       {
         "name": "Google DeepMind",
         "url": "https://deepmind.google/discover/blog/",
         "mode": "edition",
-        "note": "Not opened again in this run. Stories from November 10 and 11 are kept."
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
       },
       {
         "name": "Microsoft",
         "url": "https://blogs.microsoft.com/",
-        "mode": "edition",
-        "note": "Covered in this run through CNN, Bloomberg and Reuters: the Outlook, Teams and Copilot outage."
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
       },
       {
         "name": "NVIDIA",
         "url": "https://blogs.nvidia.com/",
         "mode": "edition",
-        "note": "Covered in this run through TechCrunch and Fortune."
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
       },
       {
         "name": "Meta AI",
         "url": "https://ai.meta.com/",
-        "mode": "edition",
-        "note": "No story selected for this edition."
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
       },
       {
         "name": "Hugging Face",
         "url": "https://huggingface.co/blog",
         "mode": "edition",
-        "note": "No story selected for this edition."
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
       },
       {
         "name": "Harvey",
         "url": "https://www.harvey.ai/newsroom",
-        "mode": "edition",
-        "note": "No new announcement found in this run. The November 9 story is kept."
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
       }
     ]
   },
@@ -64,32 +64,32 @@
       {
         "name": "TechCrunch",
         "url": "https://techcrunch.com",
-        "mode": "edition",
-        "note": "Read in this run."
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
       },
       {
         "name": "The Verge",
         "url": "https://www.theverge.com",
         "mode": "edition",
-        "note": "Not checked in this run."
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
       },
       {
         "name": "Wired",
         "url": "https://www.wired.com",
-        "mode": "link",
-        "note": "Search for this site was refused again in this run. Kept as a direct link."
+        "mode": "edition",
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
       },
       {
         "name": "MIT Technology Review",
         "url": "https://www.technologyreview.com",
         "mode": "edition",
-        "note": "Checked in this run. Nothing newer that fits; the November 9 article is kept."
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
       },
       {
         "name": "VentureBeat",
         "url": "https://venturebeat.com",
-        "mode": "edition",
-        "note": "Read in this run: three stories in this edition."
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
       }
     ]
   },
@@ -100,25 +100,25 @@
         "name": "Y Combinator",
         "url": "https://www.ycombinator.com",
         "mode": "edition",
-        "note": "Last checked November 13: the latest blog posts were from October 30."
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
       },
       {
         "name": "Startup Stealth",
         "url": "https://startupstealth.com",
         "mode": "link",
-        "note": "Last checked November 13: the site is a sign-up page for a weekly newsletter, with no dated articles to read."
+        "note": "Reading link only. Not automatically collected or verified."
       },
       {
         "name": "Startup Ideas",
         "url": "https://startup-ideas.com",
         "mode": "link",
-        "note": "Search returned no pages from this site again in this run."
+        "note": "Reading link only. Not automatically collected or verified."
       },
       {
         "name": "Early Startup Days",
         "url": "https://www.earlystartupdays.com/subscribe",
-        "mode": "edition",
-        "note": "Last checked November 13: the founder stories found date from 2024."
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
       }
     ]
   },
@@ -128,14 +128,14 @@
       {
         "name": "Andreessen Horowitz (a16z)",
         "url": "https://a16z.com",
-        "mode": "edition",
-        "note": "Checked in this run. Two essays are in this edition."
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
       },
       {
         "name": "ApexRound",
         "url": "https://apexround.com",
         "mode": "link",
-        "note": "Search returned no pages from this site again in this run."
+        "note": "Reading link only. Not automatically collected or verified."
       }
     ]
   },
@@ -146,19 +146,19 @@
         "name": "Simply You Grow",
         "url": "https://algofirst.co/marketing",
         "mode": "link",
-        "note": "The linked site is a social marketing agency page with no articles."
+        "note": "Reading link only. Not automatically collected or verified."
       },
       {
         "name": "Business Bulls",
         "url": "https://www.instagram.com/businessbulls.in/",
         "mode": "link",
-        "note": "Instagram account. No separate official news website found."
+        "note": "Reading link only. Not automatically collected or verified."
       },
       {
         "name": "Beyond Startup",
         "url": "https://www.instagram.com/beyondstartup.s/",
         "mode": "link",
-        "note": "Instagram account. No separate editorial website found."
+        "note": "Reading link only. Not automatically collected or verified."
       }
     ]
   }
