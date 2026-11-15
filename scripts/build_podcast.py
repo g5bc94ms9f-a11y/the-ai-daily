@@ -22,7 +22,7 @@ from google.genai import types
 ROOT = Path(__file__).resolve().parent.parent
 EDITION_FILE = ROOT / 'data' / 'edition.js'
 AUDIO_FILE = ROOT / 'public' / 'audio' / 'today.mp3'
-SCRIPT_MODEL = os.environ.get('GEMINI_SCRIPT_MODEL', 'gemini-2.5-flash')
+SCRIPT_MODEL = os.environ.get('GEMINI_SCRIPT_MODEL', 'gemini-3.8-flash')
 TTS_MODEL = os.environ.get('GEMINI_TTS_MODEL', 'gemini-3.8-flash-tts')
 
 
@@ -135,7 +135,7 @@ def audio_segment(client, lines):
         model=TTS_MODEL,
         input=[{'type':'user_input','content':speech_content(lines)}],
         response_format={'type':'audio'},
-        generation_config={'speech_config':{'speakers':[
+        generation_config={'speech_config':{'mode':'conversational','speakers':[
             {'speaker':'Maya','voice':'Kore'},
             {'speaker':'Ben','voice':'Puck'},
         ]}},
