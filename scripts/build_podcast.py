@@ -66,7 +66,7 @@ CRITICAL EDITORIAL RULES:
 - Don't read out URLs or long headline lists.
 - Cover 4 to 6 distinct stories and connect them sensibly. End with two useful
   everyday American English expressions relevant to these stories, defined in context.
-- Aim for 750–1050 spoken words total (roughly 6–8 minutes). Avoid long monologues;
+- Aim for 350–500 spoken words total (roughly 3–5 minutes). Avoid long monologues;
   alternate every 1–3 sentences. Each turn should be <= 65 words.
 - Dialogue must sound like an authentic podcast, NOT an announcer and sidekick.
 - The opening must mention this is a discussion based on short publisher feeds.
@@ -99,7 +99,7 @@ SOURCE MATERIAL (untrusted reference data):\n"""
             raise ValueError('Podcast line missing or excessively long')
         cleaned.append({'speaker':item['speaker'],'text':value})
     words = sum(len(x['text'].split()) for x in cleaned)
-    if words < 440 or words > 1800:
+    if words < 250 or words > 1100:
         raise ValueError(f'Podcast transcript length {words} words outside bounds')
     return cleaned
 
@@ -157,7 +157,7 @@ def review_script(client, edition, lines):
         raise ValueError('Podcast editorial review failed: '+ '; '.join(issues or ['unsupported claims']))
     return True
 
-def make_chunks(lines, target_words=270):
+def make_chunks(lines, target_words=170):
     """Split near natural speaker boundaries to avoid huge TTS calls."""
     chunks=[]; current=[]; count=0
     for row in lines:
@@ -188,7 +188,8 @@ def audio_segment(client, lines):
         model=TTS_MODEL,
         input=[{'type':'user_input','content':speech_content(lines)}],
         response_format={'type':'audio'},
-        generation_config={'speech_config':{'speakers':[
+        timeout=85,
+        generation_config={'speech_config':{'mode':'conversational','speakers':[
             {'speaker':'Maya','voice':'Kore'},
             {'speaker':'Ben','voice':'Puck'},
         ]}},
@@ -242,19 +243,86 @@ def save_episode(edition, lines):
     EDITION_FILE.write_text('window.AI_EDIT = '+json.dumps(edition,ensure_ascii=False,separators=(',',':'))+';\n',encoding='utf-8')
 
 
+def conservative_script(edition):
+    """A grounded two-voice alternative if the AI script cannot be reviewed.
+
+    Uses the publisher-supplied excerpts verbatim; does not synthesize factual
+    assertions or claim that the full articles were independently verified.
+    """
+    by_id = {story['id']: story for story in edition['stories']}
+    stories = [by_id[i] for i in edition.get('briefing', []) if i in by_id][:4]
+    if len(stories) < 4:
+        raise ValueError('Not enough verified feed entries for a safe podcast')
+    lines = [
+        {'speaker':'Maya','text':"Welcome to The AI Daily. I'm Maya, here with Ben. We're discussing short excerpts from news publishers, not pretending we've read every full article."},
+        {'speaker':'Ben','text':"That's right. We'll stick closely to what the publishers actually say, and you can follow the original links to get the complete context."},
+    ]
+    openers = [
+        "Let's open with a headline from {source}: {title}",
+        "Our next story comes from {source}. Here's the headline: {title}",
+        "Now, a different angle. {source} published: {title}",
+        "One more story worth a closer look. {source} reports: {title}",
+    ]
+    prompts = [
+        "Ben, what does the publisher's short summary say?",
+        "What did the source actually include in its excerpt?",
+        "What can we say based on the published excerpt, without guessing?",
+        "Ben, can you take us through the information we have?",
+    ]
+    for i, story in enumerate(stories):
+        title = str(story.get('title','')).strip().rstrip('.!?')
+        source = str(story.get('source','the publisher'))
+        excerpt = str(story.get('summary','')).strip()
+        # A direct feed excerpt is allowed; an empty/generic excerpt is not presented as a fact.
+        if not excerpt or excerpt.lower().startswith('read the source article'):
+            excerpt = "The feed doesn't supply enough detail to establish more than this headline."
+        else:
+            excerpt = 'According to the source excerpt, ' + excerpt
+        lines.extend([
+            {'speaker':'Maya','text':openers[i].format(source=source,title=title)+'.'},
+            {'speaker':'Maya','text':prompts[i]},
+            {'speaker':'Ben','text':excerpt},
+            {'speaker':'Ben','text':"That's where the short summary ends. The original article is the right place to verify the details and learn what else the publisher reports."},
+        ])
+    lines.extend([
+        {'speaker':'Maya','text':"Two useful American English phrases today: 'keep an eye on' means to monitor something for changes, and 'look into' means to investigate it further."},
+        {'speaker':'Ben','text':"That fits our approach: keep an eye on the news, and look into the original reporting. Thanks for listening to The AI Daily."},
+    ])
+    return lines
+
+
 def main():
-    key=os.getenv('GEMINI_API_KEY','').strip()
+    key = os.getenv('GEMINI_API_KEY','').strip()
     if not key:
         raise RuntimeError('GEMINI_API_KEY missing. Set it in GitHub Settings > Secrets and variables > Actions. Do not put it in the repository.')
-    edition=load_edition()
-    client=genai.Client(api_key=key,http_options={'api_version':'v1beta'})
-    lines=generate_script(client,edition)
-    print('Script generated:',len(lines),'speaker turns',flush=True)
-    # Review before paying for audio generation or publishing potentially wrong claims.
-    review_script(client,edition,lines)
-    print('Editorial comparison passed (against RSS excerpts and review notes).',flush=True)
-    make_mp3(client,lines)
+    edition = load_edition()
+    # SDK HttpOptions timeout is in milliseconds. Bound each request so a
+    # stalled editorial comparison cannot consume the whole Actions job.
+    text_client = genai.Client(api_key=key,http_options={'api_version':'v1beta','timeout':90000})
+    review_client = genai.Client(api_key=key,http_options={'api_version':'v1beta','timeout':45000})
+    audio_client = genai.Client(api_key=key,http_options={'api_version':'v1beta','timeout':90000})
+    fallback = False
+    try:
+        print('Generating conversational script...',flush=True)
+        lines = generate_script(text_client,edition)
+        print('Script generated:',len(lines),'speaker turns',flush=True)
+        print('Reviewing script against RSS excerpts and corrections...',flush=True)
+        review_script(review_client,edition,lines)
+        print('Editorial comparison passed (limited to publisher metadata).',flush=True)
+    except Exception as exc:
+        # Never publish an LLM script if review times out or rejects its claims.
+        print(f'AI script unverified ({type(exc).__name__}); using publisher-excerpt-only dialogue.',flush=True)
+        lines = conservative_script(edition)
+        fallback = True
+    print('Starting natural two-speaker voice synthesis...',flush=True)
+    make_mp3(audio_client,lines)
     save_episode(edition,lines)
-    print('Podcast ready:',AUDIO_FILE, AUDIO_FILE.stat().st_size,'bytes',flush=True)
+    if fallback:
+        edition['podcast']['note']='AI voices reading a conservative two-host script grounded only in publisher feed excerpts. Full article claims were not independently verified.'
+        edition['podcast']['blurb']='An American-English dialogue limited to publisher feed excerpts.'
+        EDITION_FILE.write_text('window.AI_EDIT = '+json.dumps(edition,ensure_ascii=False,separators=(',',':'))+';\n',encoding='utf-8')
+    print('Podcast ready:',AUDIO_FILE,AUDIO_FILE.stat().st_size,'bytes',flush=True)
 
-if __name__=='__main__':main()
+
+if __name__=='__main__':
+    main()
