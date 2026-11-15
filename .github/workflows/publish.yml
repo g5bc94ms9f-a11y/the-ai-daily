@@ -32,11 +32,20 @@ jobs:
           python-version: '3.13'
       - name: Collect and prepare news edition
         run: python scripts/update.py
+      - name: Install Gemini SDK and audio encoder
+        run: |
+          python -m pip install --disable-pip-version-check "google-genai>=2.25,<3"
+          command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - name: Generate natural two-host podcast with Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/build_podcast.py
       - name: Prepare website-only folder
         run: |
           mkdir -p public/data
           cp index.html public/index.html
           cp data/edition.js public/data/edition.js
+          test -s public/audio/today.mp3
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload public website
