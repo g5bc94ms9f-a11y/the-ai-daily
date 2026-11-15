@@ -1,0 +1,10 @@
+{
+  "https://the-decoder.com/openai-reassigns-robotics-researchers-to-other-teams-as-general-purpose-models-might-make-specialized-robotics-ai-unnecessary/": {
+    "summary": "The report describes researchers moving to other OpenAI teams. The publisher subsequently clarified that OpenAI's robotics research continues; it should not be described as entirely dissolved.",
+    "note": "Updated to reflect the publisher's correction regarding the continued robotics work. See the original article for its current wording."
+  },
+  "https://openai.com/index/introducing-chatgpt-wallet": {
+    "summary": "OpenAI announced ChatGPT Wallet. The initial rollout is through dots for eligible ChatGPT Pro users in the United States; broader availability should not be inferred from the headline.",
+    "note": "Availability clarification based on the original OpenAI announcement. Check the source for current rollout eligibility."
+  }
+}

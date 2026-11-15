@@ -1,0 +1,165 @@
+[
+  {
+    "group": "AI Companies",
+    "items": [
+      {
+        "name": "OpenAI",
+        "url": "https://openai.com/news/",
+        "mode": "edition",
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
+      },
+      {
+        "name": "Anthropic",
+        "url": "https://www.anthropic.com/news",
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
+      },
+      {
+        "name": "Google Gemini",
+        "url": "https://blog.google/products/gemini/",
+        "mode": "edition",
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
+      },
+      {
+        "name": "Google DeepMind",
+        "url": "https://deepmind.google/discover/blog/",
+        "mode": "edition",
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
+      },
+      {
+        "name": "Microsoft",
+        "url": "https://blogs.microsoft.com/",
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
+      },
+      {
+        "name": "NVIDIA",
+        "url": "https://blogs.nvidia.com/",
+        "mode": "edition",
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
+      },
+      {
+        "name": "Meta AI",
+        "url": "https://ai.meta.com/",
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
+      },
+      {
+        "name": "Hugging Face",
+        "url": "https://huggingface.co/blog",
+        "mode": "edition",
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
+      },
+      {
+        "name": "Harvey",
+        "url": "https://www.harvey.ai/newsroom",
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
+      }
+    ]
+  },
+  {
+    "group": "Technology Publications",
+    "items": [
+      {
+        "name": "TechCrunch",
+        "url": "https://techcrunch.com",
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
+      },
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com",
+        "mode": "edition",
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
+      },
+      {
+        "name": "Wired",
+        "url": "https://www.wired.com",
+        "mode": "edition",
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
+      },
+      {
+        "name": "MIT Technology Review",
+        "url": "https://www.technologyreview.com",
+        "mode": "edition",
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
+      },
+      {
+        "name": "VentureBeat",
+        "url": "https://venturebeat.com",
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
+      }
+    ]
+  },
+  {
+    "group": "Startups & Entrepreneurship",
+    "items": [
+      {
+        "name": "Y Combinator",
+        "url": "https://www.ycombinator.com",
+        "mode": "edition",
+        "note": "RSS source configured; collection status is recalculated in each edition. Full articles are not independently verified."
+      },
+      {
+        "name": "Startup Stealth",
+        "url": "https://startupstealth.com",
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
+      },
+      {
+        "name": "Startup Ideas",
+        "url": "https://startup-ideas.com",
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
+      },
+      {
+        "name": "Early Startup Days",
+        "url": "https://www.earlystartupdays.com/subscribe",
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
+      }
+    ]
+  },
+  {
+    "group": "Venture Capital",
+    "items": [
+      {
+        "name": "Andreessen Horowitz (a16z)",
+        "url": "https://a16z.com",
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
+      },
+      {
+        "name": "ApexRound",
+        "url": "https://apexround.com",
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
+      }
+    ]
+  },
+  {
+    "group": "Founders & Business",
+    "items": [
+      {
+        "name": "Simply You Grow",
+        "url": "https://algofirst.co/marketing",
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
+      },
+      {
+        "name": "Business Bulls",
+        "url": "https://www.instagram.com/businessbulls.in/",
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
+      },
+      {
+        "name": "Beyond Startup",
+        "url": "https://www.instagram.com/beyondstartup.s/",
+        "mode": "link",
+        "note": "Reading link only. Not automatically collected or verified."
+      }
+    ]
+  }
+]
