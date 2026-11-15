@@ -15,7 +15,7 @@ permissions:
 
 concurrency:
   group: ai-daily-pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   publish:
@@ -43,15 +43,22 @@ jobs:
           python -m pip install --disable-pip-version-check "google-genai>=2.25,<3"
           command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - name: Generate natural two-host podcast with Gemini
+        timeout-minutes: 8
+        continue-on-error: true
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_SCRIPT_MODEL: gemini-3.8-flash
         run: python scripts/build_podcast.py
       - name: Prepare website-only folder
         run: |
           mkdir -p public/data
           cp index.html public/index.html
           cp data/edition.js public/data/edition.js
-          test -s public/audio/today.mp3
+          if test -s public/audio/today.mp3; then
+            echo "Natural podcast generated successfully."
+          else
+            echo "Podcast unavailable this run; publishing the verified news edition without audio."
+          fi
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload public website
