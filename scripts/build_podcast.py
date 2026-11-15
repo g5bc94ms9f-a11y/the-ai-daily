@@ -22,7 +22,7 @@ from google.genai import types
 ROOT = Path(__file__).resolve().parent.parent
 EDITION_FILE = ROOT / 'data' / 'edition.js'
 AUDIO_FILE = ROOT / 'public' / 'audio' / 'today.mp3'
-SCRIPT_MODEL = os.environ.get('GEMINI_SCRIPT_MODEL', 'gemini-2.5-flash')
+SCRIPT_MODEL = os.environ.get('GEMINI_SCRIPT_MODEL', 'gemini-3.8-flash')
 TTS_MODEL = os.environ.get('GEMINI_TTS_MODEL', 'gemini-3.8-flash-tts')
 
 
