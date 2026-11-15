@@ -136,13 +136,6 @@ h1,h2,h3{text-wrap:balance;font-weight:700;letter-spacing:-.025em}
 .btn[data-act="listen"][aria-pressed="true"],.edbar .btn,.btn.solid{background:var(--accent);color:#fff}
 .btn[disabled]{opacity:.55;cursor:default}
 
-/* Section pills */
-.strip{margin-top:18px}
-.strip-in{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:0 20px;max-width:1080px;margin:0 auto}
-.strip-in::-webkit-scrollbar{display:none}
-.strip a{flex:none;text-decoration:none;font-size:14.5px;font-weight:600;padding:8px 15px;border-radius:999px;background:var(--surface);color:var(--muted)}
-.strip a[aria-current="page"]{background:var(--ink);color:var(--paper)}
-
 /* Notices */
 .notice{background:var(--surface);border-radius:16px;padding:13px 16px;margin:18px 0 0;font-size:15px;color:var(--warn)}
 details.notes{margin-top:14px;font-size:14.5px;color:var(--muted)}
@@ -320,11 +313,6 @@ legend{padding:0;margin-bottom:10px;color:var(--muted);text-transform:uppercase;
 .pod-line b{color:var(--ink);margin-right:4px}
 .pod-line.cur{background:var(--g-btn);color:var(--ink)}
 
-/* Tab bar (phone) */
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--glass);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(5,1fr)}
-.tabs a{text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px 12px;color:var(--muted);font-size:10.5px;font-weight:600}
-.tabs svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.tabs a[aria-current="page"]{color:var(--accent)}
 .toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:11px 18px;border-radius:22px;font-size:14px;font-weight:500;z-index:30;max-width:calc(100vw - 36px);text-align:center}
 .toast[hidden]{display:none}
 body.locked{overflow:hidden}
@@ -332,7 +320,6 @@ body.locked{overflow:hidden}
 
 @media (min-width:860px){
   body{padding-bottom:0}
-  .tabs{display:none}
   .toast{bottom:28px}
   .front{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);column-gap:26px;grid-template-areas:"lead brief" "top brief";grid-template-rows:auto 1fr}
   .front>.lead{grid-area:lead;padding:34px 34px 28px} .front>.brief{grid-area:brief;align-self:start} .front>.topai{grid-area:top}
@@ -342,7 +329,7 @@ body.locked{overflow:hidden}
   .legend{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (prefers-reduced-motion:no-preference){
-  .hl,.btn,.chip,.icon,.strip a,.row,.lead{transition:color .15s,background-color .15s,opacity .15s}
+  .hl,.btn,.chip,.icon,.mast-nav a,.row,.lead{transition:color .15s,background-color .15s,opacity .15s}
   @keyframes rise{from{transform:translateY(14px);opacity:.3}}
   .reader:not([hidden]) .rbody,.sheet:not([hidden]) .rbody{animation:rise .26s ease-out}
 }
@@ -380,11 +367,6 @@ body{letter-spacing:-.016em}
 .edbar .btn{padding:11px 19px;min-height:43px;letter-spacing:-.02em;background:#2583ef;color:#fff}
 .edbar .btn:hover{background:#4598ff}
 .status{font-size:12.5px;gap:2px 16px}
-.strip{margin-top:28px}
-.strip-in{max-width:1180px;padding-left:clamp(20px,4.1vw,52px);padding-right:clamp(20px,4.1vw,52px);gap:8px}
-.strip a{background:var(--surface);border:1px solid var(--rule);color:var(--muted);padding:11px 18px;font-size:13.5px;font-weight:650;transition:background .18s,color .18s}
-.strip a[aria-current="page"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
-.strip a:hover:not([aria-current="page"]){background:var(--surface2);color:var(--ink)}
 main{padding-top:12px;padding-bottom:85px}
 .block-h{margin:0 3px 16px;gap:10px}
 .block-h h2{font-size:clamp(23px,3vw,33px);font-weight:740;letter-spacing:-.044em}
@@ -472,10 +454,6 @@ main{padding-top:12px;padding-bottom:85px}
 .site-footer p{max-width:49ch}
 .site-footer a{text-decoration:none;color:var(--ink);font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:8px}
 .site-footer a:hover{color:var(--accent)}
-.tabs{border-top:1px solid rgba(128,128,135,.18);background:var(--glass)}
-.tabs a{padding-top:10px;padding-bottom:max(12px,env(safe-area-inset-bottom));gap:6px;font-size:10.5px}
-.tabs svg{width:24px;height:24px}
-.tabs a[aria-current="page"]{color:var(--accent)}
 /* Make the design work on narrow iPhones */
 @media(max-width:600px){
   .nav-in{height:65px}
@@ -485,7 +463,6 @@ main{padding-top:12px;padding-bottom:85px}
   .edbar{flex-wrap:wrap;padding:14px;border-radius:18px}
   .edbar .status{flex:1 1 180px}
   .edbar .btn{margin-left:auto;min-height:41px;padding:9px 16px}
-  .strip{margin-top:22px}
   main{padding-top:7px}
   .hi-card{flex-basis:min(86vw,480px);height:460px;min-height:460px;border-radius:28px;padding:24px}
   .hi-art{width:94%;top:-23%;right:-35%}
@@ -504,6 +481,19 @@ main{padding-top:12px;padding-bottom:85px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hi-track{scroll-behavior:auto}}
 
+
+/* Unified site navigation: the header is the only section menu. */
+body{padding-bottom:0}
+.mast-nav{scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.mast-nav::-webkit-scrollbar{display:none}
+.footer-explore{display:flex;align-content:center;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:10px 19px}
+.footer-explore a{font-size:12px;font-weight:600}
+@media(max-width:700px){
+  .mast-nav{justify-content:flex-start;gap:24px;overflow-x:auto;overflow-y:hidden;padding:0 17px;scroll-snap-type:x proximity}
+  .mast-nav a{flex:0 0 auto;scroll-snap-align:start;font-size:13px;padding:0 1px 6px}
+  .toast{bottom:24px}
+  .footer-explore{justify-content:flex-start;gap:12px 18px}
+}
 </style>
 </head>
 <body>
@@ -531,8 +521,10 @@ main{padding-top:12px;padding-bottom:85px}
   <nav class="mast-nav" aria-label="Main navigation">
     <a href="#today" data-route="today" aria-current="page">Home</a>
     <a href="#ai" data-route="ai">News</a>
+    <a href="#startups" data-route="startups">Startups</a>
     <a href="#videos" data-route="videos">Videos</a>
     <a href="#today" data-jump="markets">Markets</a>
+    <a href="#saved" data-route="saved">Saved</a>
     <a href="#today" data-jump="about">About</a>
   </nav>
 </header>
@@ -554,13 +546,18 @@ main{padding-top:12px;padding-bottom:85px}
   <p class="psub" id="psub"></p>
   <div class="edbar"><span class="status" id="edstatus"></span><button class="btn" data-act="refresh" id="refresh">Check for updates</button></div>
 </div>
-<nav class="strip" aria-label="Sections"><div class="strip-in" id="strip"></div></nav>
+
 <main class="wrap" id="view"></main>
 <footer class="site-footer" id="site-about" aria-label="About The AI Daily">
   <div><strong>The <span class="brand-ai">AI</span> Daily.</strong><p>Signals from AI, technology and startups. Explore original reporting from the publishers behind each story.</p></div>
-  <a href="https://www.instagram.com/readtheaidaily/" target="_blank" rel="noopener noreferrer" aria-label="Follow The AI Daily on Instagram">Follow @readtheaidaily <span aria-hidden="true">↗</span></a>
+  <div class="footer-explore" aria-label="More sections">
+    <a href="#vc">Venture Capital</a>
+    <a href="#business">AI &amp; Business</a>
+    <a href="#sources">Sources</a>
+    <a href="https://www.instagram.com/readtheaidaily/" target="_blank" rel="noopener noreferrer" aria-label="Follow The AI Daily on Instagram">Instagram ↗</a>
+  </div>
 </footer>
-<nav class="tabs" aria-label="Quick navigation" id="tabs"></nav>
+
 
 <div class="reader" id="reader" role="dialog" aria-modal="true" aria-labelledby="r-title" hidden></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="s-title" hidden></div>
@@ -601,11 +598,6 @@ var SECTIONS = {
   business:{name:"AI & Business", short:"Business", blurb:"How law firms, financial institutions and corporate teams put AI to work."}
 };
 var ROUTES = [["today","Today"],["ai","AI News"],["startups","Startups & Founders"],["vc","Venture Capital"],["business","AI & Business"],["videos","Videos"],["sources","My Sources"],["saved","Saved"]];
-var TABS = [["today","Today",'<rect x="4" y="5" width="16" height="14" rx="2.5"/><path d="M8 9.5h8M8 13h8M8 16.5h5"/>'],
-  ["ai","AI",'<path d="M11 3.5l1.9 5.1 5.1 1.9-5.1 1.9L11 17.5l-1.9-5.1L4 10.5l5.1-1.9z"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/>'],
-  ["startups","Startups",'<path d="M4 17l5.5-5.5 3.5 3.5L20 8"/><path d="M15 8h5v5"/>'],
-  ["videos","Videos",'<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M10 9l5 3-5 3z"/>'],
-  ["saved","Saved",'<path d="M6.5 4h11v16.5l-5.5-4-5.5 4z"/>']];
 var PAGE = {today:["Today","Your Daily Intelligence on AI, Technology & Startups"],
   videos:["Videos","Interviews, explainers and practical insights from leading AI and startup creators."],
   sources:["My Sources","Where the stories come from. Publisher feeds checked automatically are marked; other sources are direct links."],
@@ -862,9 +854,13 @@ function nav(){
     if(a.getAttribute("data-route")===route) a.setAttribute("aria-current","page");
     else a.removeAttribute("aria-current");
   });
-  document.getElementById("strip").innerHTML = ROUTES.map(function(r){ return '<a href="#'+r[0]+'"'+(r[0]===route?' aria-current="page"':'')+'>'+esc(r[1])+(r[0]==="saved"&&state.saved.length?" ("+state.saved.length+")":"")+'</a>'; }).join("");
-  document.getElementById("tabs").innerHTML = TABS.map(function(r){ return '<a href="#'+r[0]+'"'+(r[0]===route?' aria-current="page"':'')+'><svg viewBox="0 0 24 24" aria-hidden="true">'+r[2]+'</svg><span>'+esc(r[1])+'</span></a>'; }).join("");
-  var cur = document.querySelector("#strip [aria-current]"); if(cur && cur.scrollIntoView) { try { cur.scrollIntoView({block:"nearest",inline:"center"}); } catch(e){} }
+  // A single accessible navigation works on desktop and mobile.
+  var bar = document.querySelector(".mast-nav");
+  var active = bar.querySelector('[aria-current="page"]');
+  if(active && bar.scrollWidth > bar.clientWidth){
+    var target = active.offsetLeft - bar.offsetLeft - (bar.clientWidth - active.offsetWidth)/2;
+    bar.scrollTo({left:Math.max(0,target),behavior:"smooth"});
+  }
 }
 function notices(){
   var h = "";
