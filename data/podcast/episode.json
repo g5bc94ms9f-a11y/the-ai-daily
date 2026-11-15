@@ -1,0 +1,61 @@
+{
+  "title": "The AI Daily — Morning Conversation",
+  "blurb": "An American-English dialogue limited to publisher feed excerpts.",
+  "hosts": [
+    "Maya",
+    "Ben"
+  ],
+  "lines": [
+    [
+      0,
+      "Hey, welcome to The AI Daily. I'm Maya, and Ben is here with me. We've picked a few headlines from publisher news feeds to talk through."
+    ],
+    [
+      1,
+      "Hi, Maya. These are short feed excerpts, not the full articles, so we'll keep the facts carefully attributed and avoid filling in the blanks."
+    ],
+    [
+      0,
+      "Let's start with TechCrunch AI. The headline is: Where was Nvidia’s security team."
+    ],
+    [
+      1,
+      "According to the publisher's excerpt, Nvidia’s security chief quietly left in August, and now that CEO Jensen Huang has stepped down over his relationships, including…"
+    ],
+    [
+      0,
+      "That brings us to The Decoder, which has this headline: Anthropic CEO Amodei admits \"there's a huge uncertainty in what's going to happen next year\" days before a record IPO."
+    ],
+    [
+      1,
+      "According to the publisher's excerpt, Days before what could be the largest IPO in history, Anthropic CEO Dario Amodei called buying compute 'the deepest business…"
+    ],
+    [
+      0,
+      "Next up, Google Gemini reports: Connect Google Wallet to Gemini for personal finance insights."
+    ],
+    [
+      1,
+      "According to the publisher's excerpt, All Gemini app users in the U.S. can connect Google Wallet to get responses informed by their spending habits."
+    ],
+    [
+      0,
+      "And our fourth story is from The Verge: Jensen Huang and the decline of the visionary showman founder CEO."
+    ],
+    [
+      1,
+      "According to the publisher's excerpt, On January 6th, 2025, Nvidia CEO Jensen Huang got his rockstar moment at last. He strode triumphantly onstage, hand raised…"
+    ],
+    [
+      0,
+      "Before we go, here's a useful expression: keep an eye on. It means watch something for changes — like a fast-moving AI story."
+    ],
+    [
+      1,
+      "Exactly. And look into means investigate further. Follow the original reporting for context. See you in the next edition."
+    ]
+  ],
+  "audioUrl": "audio/today.mp3?v=20261115063654",
+  "publishedAt": "2026-11-15T06:36:54.836231+00:00",
+  "note": "AI voices reading a conservative two-host script grounded only in publisher feed excerpts. Full article claims were not independently verified."
+}
