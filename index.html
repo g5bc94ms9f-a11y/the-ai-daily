@@ -474,7 +474,7 @@ function pick(s){ return (state.prefs.simple && s.simple) ? s.simple : s.summary
 
 /* ---------- 4b. Podcast: two voices read the day's script, one line at a time ---------- */
 var PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>';
-function podData(){ var P = ED.podcast; return (P && P.lines && P.lines.length && P.hosts && P.hosts.length===2) ? P : null; }
+function podData(){ var P = ED.podcast; return (P && P.audioUrl && P.lines && P.lines.length && P.hosts && P.hosts.length===2) ? P : null; }
 function podMinutes(P){ var w = P.lines.reduce(function(n,l){return n+l[1].split(/\s+/).length;},0); return Math.max(1,Math.round(w/150)); }
 function podVoices(){
   var v = []; try { v = window.speechSynthesis.getVoices().filter(function(x){return /^en[-_]US/i.test(x.lang);}); } catch(e){}
@@ -512,21 +512,14 @@ function podPause(){
 }
 function podSeek(i){ var P = podData(); if(!P) return; var was = pod.on; podPause(); pod.i = Math.max(0,Math.min(P.lines.length-1,i)); if(was) podPlay(); else podUI(); }
 function podCard(){
-  var P = podData(); if(!P) return "";
-  var audio = !!(ttsNS||canSpeak);
-  return '<section class="pod" aria-label="Podcast"><div class="pod-head"><div class="pod-art" aria-hidden="true"><b>AI</b></div>'+
-    '<div class="pod-meta"><p>Podcast · about '+podMinutes(P)+' min</p><p>'+esc(P.hosts.join(" & "))+'</p></div>'+
-    (audio?'<button class="pod-round" data-act="podrate" id="pod-rate" aria-label="Change speed"></button>':'')+'</div>'+
-    '<h2>'+esc(P.title)+'</h2><p class="one" id="pod-now"></p>'+
-    '<div class="pod-bar" aria-hidden="true"><i id="pod-fill"></i></div>'+
-    (audio?'<div class="pod-ctl"><button class="pod-ic" data-act="podback" aria-label="Previous part"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.5 6v12L3 12zM21 6v12l-8.5-6z"/></svg></button>'+
-      '<button class="pod-ic big" data-act="pod" id="pod-btn" aria-label="Play the podcast">'+PLAY+'</button>'+
-      '<button class="pod-ic" data-act="podfwd" aria-label="Next part"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.5 6v12l8.5-6zM3 6v12l8.5-6z"/></svg></button></div>'
-      :'<p class="hint">Audio is not available in this browser. You can read the transcript.</p>')+
-    '<p class="hint" id="pod-hint" role="status">'+esc(pod.hint||"")+'</p>'+
-    '<div class="pod-tools"><button class="pod-pill" data-act="podopen" aria-expanded="'+pod.open+'">'+(pod.open?"Hide transcript":"Transcript")+'</button></div>'+
-    (pod.open?'<div class="pod-lines" id="pod-lines">'+P.lines.map(function(l,i){return '<button class="pod-line" data-act="podline" data-i="'+i+'"><b>'+esc(P.hosts[l[0]])+'</b> '+esc(l[1])+'</button>';}).join("")+'</div>':'')+
-  '</section>';
+  var P = podData();
+  if(!P) return '<section class="pod" aria-label="Podcast"><div class="pod-head"><div class="pod-art" aria-hidden="true"><b>AI</b></div><div class="pod-meta"><p>Podcast</p><p>Maya & Ben · US English</p></div></div><h2>The AI Daily — Morning Conversation</h2><p class="hint">Today’s natural-voice podcast is not available yet. The last successful edition remains online until the next publication.</p></section>';
+  return '<section class="pod" aria-label="Podcast"><div class="pod-head"><div class="pod-art" aria-hidden="true"><b>AI</b></div><div class="pod-meta"><p>Podcast · approximately '+podMinutes(P)+' min</p><p>'+esc(P.hosts.join(' & '))+' · American English</p></div></div>'+ 
+    '<h2>'+esc(P.title)+'</h2><p class="one">'+esc(P.blurb)+'</p>'+
+    '<audio controls preload="metadata" playsinline style="width:100%;margin:17px 0 11px" src="'+esc(P.audioUrl)+'" aria-label="Play the natural two-host AI podcast">Your browser does not support audio playback.</audio>'+
+    '<p class="hint">AI-generated audio based on publisher headlines and short excerpts. Check original sources for complete reporting.</p>'+
+    '<details class="notes" style="margin-top:13px"><summary class="ui">Read full transcript</summary><div class="pod-lines" style="max-height:320px;overflow:auto;margin-top:12px">'+
+      P.lines.map(function(l){return '<p class="pod-line" style="cursor:auto"><b>'+esc(P.hosts[l[0]])+'</b> '+esc(l[1])+'</p>';}).join('')+'</div></details></section>';
 }
 function podUI(){
   var P = podData(); if(!P) return;
@@ -584,7 +577,7 @@ function viewToday(){
   return notices()+podCard()+'<div class="front">'+
     '<section class="lead" data-act="open" data-id="'+esc(lead.id)+'">'+kicker(lead)+'<button class="hl">'+esc(lead.title)+'</button><p class="sum">'+esc(pick(lead))+'</p>'+meta(lead)+'</section>'+
     '<section class="brief" aria-labelledby="bh"><p class="ui muted">'+b.length+' stories · about '+Math.max(1,Math.round(words/190))+' min</p><h2 id="bh">Your Morning AI Briefing</h2>'+
-      '<div class="brief-tools">'+listenBtn("briefing","Listen to the briefing")+'</div>'+
+      '<div class="brief-tools">'+listenBtn("briefing","Read aloud (device voice)")+'</div>'+
       '<ol>'+b.map(function(s){return '<li data-act="open" data-id="'+esc(s.id)+'"><div><button class="hl">'+esc(s.title)+'</button><p class="one">'+esc(firstSentence(pick(s)))+'</p><div class="meta mono"><span>'+esc(s.source)+' · '+esc(when(s.date))+'</span></div></div></li>';}).join("")+'</ol></section>'+
     '<section class="topai">'+blockH("Top AI headlines","ai","All AI news")+rows(top,false)+'</section>'+
     '<section class="full cols">'+
