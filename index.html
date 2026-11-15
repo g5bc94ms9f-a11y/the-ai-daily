@@ -41,32 +41,83 @@ h1,h2,h3,h4,p{margin:0}
 h1,h2,h3{text-wrap:balance;font-weight:700;letter-spacing:-.025em}
 .spacer{flex:1}
 
-/* Glass nav */
-.nav{position:sticky;top:0;z-index:10;background:var(--glass);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--rule)}
-.nav-in{max-width:1080px;margin:0 auto;padding:0 12px 0 20px;height:52px;display:flex;align-items:center;gap:2px}
-.brand{font-size:19px;font-weight:700;letter-spacing:-.02em;text-decoration:none}
-.brand b{background:linear-gradient(90deg,#2997FF,#BF5AF2 55%,#FF375F);-webkit-background-clip:text;background-clip:text;color:transparent}
-.icon{width:44px;height:44px;display:grid;place-items:center;border-radius:50%}
-.icon:hover{background:var(--surface2)}
-.icon svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 
-/* AI Markets — official TradingView feed; intentionally no fabricated quotes */
-.market-strip{position:relative;z-index:2;color:#f5f5f7;background:linear-gradient(135deg,#0a0b10 0%,#11131d 53%,#08090d 100%);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.13)}
-.market-strip-inner{max-width:1120px;margin:0 auto;padding:16px 20px 10px}
-.market-strip-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 20px;margin:0 0 9px}
-.market-strip-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.market-strip-title strong{font-size:12px;line-height:1.2;letter-spacing:.15em;font-weight:800;text-transform:uppercase;color:#f5f5f7}
-.market-strip-title .market-dot{display:inline-block;width:6px;height:6px;flex:none;border-radius:50%;background:#8894ff;box-shadow:0 0 11px rgba(146,133,255,.8)}
-.market-data-status{font-size:11px;font-weight:600;color:#b8b8c3;letter-spacing:.02em}
-.market-strip-tape{width:100%;min-height:72px;overflow:hidden;border-radius:15px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07)}
-.market-strip-tape .tradingview-widget-container{width:100%;min-height:66px}
-.market-strip-tape .tradingview-widget-container__widget{width:100%;min-height:56px}
-.market-strip-tape .tradingview-widget-copyright{font-size:10px;color:#aeb1bd;text-align:right;padding:0 12px 7px}
-.market-strip-tape .tradingview-widget-copyright a{color:#c9c8ff;text-decoration:none}
-.market-strip-tape .tradingview-widget-copyright a:hover{text-decoration:underline}
-.market-strip-note{font-size:11px;line-height:1.45;color:#a9aaba;padding-top:9px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.market-strip-note a{color:#d6d4ff;text-decoration:underline;text-decoration-color:rgba(214,212,255,.4);text-underline-offset:2px}
-@media(max-width:600px){.market-strip-inner{padding:13px 14px 11px}.market-strip-heading{gap:4px}.market-strip-note{font-size:10px}.market-strip-title strong{font-size:11px}}
+/* Brand wordmark — matches the custom A mark gradient. */
+.brand-ai{
+  color:#966bff;
+  background:linear-gradient(112deg,#f04ca5 0%,#a763f5 34%,#5884ff 68%,#1fe0df 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* Reference-inspired editorial masthead and compact financial tape */
+.nav{
+  position:sticky;top:0;z-index:35;background:#050507;color:#f7f7f9;
+  border-bottom:1px solid #27272d;backdrop-filter:none;-webkit-backdrop-filter:none
+}
+.nav-in{max-width:1240px;height:100px;margin:0 auto;padding:0 36px;display:flex;align-items:center;gap:20px}
+.brand{display:inline-flex;align-items:center;gap:15px;text-decoration:none;color:#f7f7f9;min-width:0}
+.brand-mark{width:56px;height:56px;flex:none;display:block;filter:drop-shadow(0 2px 11px rgba(91,137,255,.14))}
+.brand-words{display:flex;flex-direction:column;gap:1px;line-height:1.1;min-width:0}
+.brand-words strong{font-size:38px;letter-spacing:-.055em;font-weight:750;white-space:nowrap}
+.brand-words small{color:#c4c4ca;letter-spacing:.20em;font-weight:650;font-size:10px;white-space:nowrap;margin-left:2px}
+.head-actions{display:flex;align-items:center;gap:11px}
+.nav .icon{width:42px;height:42px;border-radius:50%;color:#f5f5f7;display:grid;place-items:center}
+.nav .icon:hover{background:rgba(255,255,255,.10)}
+.nav .icon svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.podcast-link{margin-left:6px;display:inline-flex;align-items:center;gap:10px;min-height:43px;padding:0 22px;border:1px solid #92929b;border-radius:999px;text-decoration:none;font-size:15px;font-weight:650;white-space:nowrap;color:#f9f9fc}
+.podcast-link:hover{background:#1b1b20;border-color:#f1f1f5}
+.podcast-link svg{height:20px;width:20px;flex:none;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.mast-nav{display:flex;align-items:stretch;justify-content:center;gap:60px;height:48px;max-width:1240px;margin:0 auto}
+.mast-nav a{display:flex;align-items:center;justify-content:center;border-bottom:3px solid transparent;padding:0 3px 8px;text-decoration:none;color:#a4a4ab;font-size:17px;font-weight:510;white-space:nowrap;transition:color .15s}
+.mast-nav a:hover,.mast-nav a[aria-current="page"]{color:#f5f5f7}
+.mast-nav a[aria-current="page"]{border-bottom-color:#f5f5f7}
+@media(max-width:700px){
+  .nav-in{height:65px;padding:0 13px;gap:10px}
+  .brand{gap:8px}
+  .brand-mark{width:35px;height:35px}
+  .brand-words strong{font-size:21px;letter-spacing:-.052em}
+  .brand-words small{display:none}
+  .head-actions{gap:2px}
+  .nav .icon{width:35px;height:40px}
+  .nav .icon svg{width:19px;height:19px}
+  .podcast-link{margin-left:2px;min-height:34px;width:36px;padding:0;justify-content:center;border-color:#666671}
+  .podcast-link span{display:none}
+  .podcast-link svg{width:17px;height:17px}
+  .mast-nav{height:42px;justify-content:space-between;gap:0;padding:0 15px;max-width:none}
+  .mast-nav a{font-size:13px;padding:0 4px 6px}
+}
+@media(max-width:385px){
+  .brand-words strong{font-size:19px}
+  .brand-mark{width:31px;height:31px}
+  .head-actions{gap:0}
+  .nav .icon{width:31px}
+  .podcast-link{width:31px;height:32px}
+}
+/* Data is rendered by the TradingView widget, never by made-up numbers. */
+.market-strip{position:relative;z-index:2;background:#07080b;color:#f8f8fa;color-scheme:dark;border-bottom:1px solid #222228}
+.market-strip-tape{width:100%;height:46px;min-height:0;overflow:hidden;background:#07080b}
+.market-strip-tape tv-ticker-tape{
+  display:block;width:100%;height:46px;min-height:46px;color-scheme:dark;
+  --tv-widget-background-color:#07080b;
+  --tv-widget-text-color:#c5c5cc;--tv-widget-price-text-color:#f5f5f7;
+  --tv-widget-font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial,sans-serif;
+  --tv-widget-positive-color:#34d68b;--tv-widget-negative-color:#ff5b6a;
+  --tv-widget-accent-color:#b3a0ff;
+}
+.market-loading{height:46px;display:flex;align-items:center;justify-content:center;color:#8b8b95;font-size:12px}
+.market-source{margin:0 auto;min-height:16px;display:flex;align-items:center;justify-content:center;gap:5px;padding:2px 15px 3px;font-size:9px;letter-spacing:.01em;color:#85858e}
+.market-source a{color:#b4b4bd;text-decoration:underline;text-underline-offset:2px}
+.market-strip-noscript{margin:0;padding:4px;text-align:center;font-size:11px;color:#aaa}
+.market-strip-noscript a{color:#ccc}
+@media(max-width:700px){
+  .market-strip-tape,.market-strip-tape tv-ticker-tape{height:42px;min-height:42px}
+  .market-loading{height:42px}
+  .market-source{font-size:8px}
+}
+
+#ai-market-tape,.pod,#site-about{scroll-margin-top:165px}
 
 /* Page title */
 .top{padding-top:26px}
@@ -315,8 +366,8 @@ html{scroll-behavior:smooth}
 body{letter-spacing:-.016em}
 .wrap{max-width:1180px;padding-left:clamp(20px,4.1vw,52px);padding-right:clamp(20px,4.1vw,52px)}
 .nav{border-bottom:1px solid rgba(128,128,135,.18);box-shadow:0 2px 32px rgba(0,0,0,.08)}
-.nav-in{max-width:1180px;height:64px;padding-left:clamp(20px,4.1vw,52px);padding-right:clamp(13px,3.2vw,42px);gap:5px}
-.brand{font-size:clamp(19px,2vw,23px);font-weight:760;letter-spacing:-.041em;white-space:nowrap}
+
+
 .brand b{background:linear-gradient(110deg,#8ac4ff 4%,#b27aff 50%,#ff578a 96%);-webkit-background-clip:text;background-clip:text}
 .icon{width:43px;height:43px;flex:none;transition:background .2s,transform .2s}
 .icon:hover{transform:translateY(-1px)}
@@ -427,7 +478,7 @@ main{padding-top:12px;padding-bottom:85px}
 .tabs a[aria-current="page"]{color:var(--accent)}
 /* Make the design work on narrow iPhones */
 @media(max-width:600px){
-  .nav-in{height:58px}
+  .nav-in{height:65px}
   .top{padding-top:31px}
   .ptitle{font-size:clamp(54px,12.6vw,76px);margin-top:8px}
   .psub{font-size:19px}
@@ -456,92 +507,47 @@ main{padding-top:12px;padding-bottom:85px}
 </style>
 </head>
 <body>
-<header class="nav"><div class="nav-in">
-  <a class="brand" href="#today" aria-label="The AI Daily, front page">The <b>AI</b> Daily</a>
-  <span class="spacer"></span>
-<a class="icon" href="https://www.instagram.com/readtheaidaily/" target="_blank" rel="noopener noreferrer" aria-label="Follow The AI Daily on Instagram" title="@readtheaidaily"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-   <button class="icon" data-act="search" aria-label="Search stories"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button>
-  <button class="icon" data-act="prefs" aria-label="Preferences"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button>
-</div></header>
-<section class="market-strip" aria-label="AI stocks — TradingView market quotations">
-  <div class="market-strip-inner">
-    <div class="market-strip-heading">
-      <div class="market-strip-title"><span class="market-dot" aria-hidden="true"></span><strong>AI Markets</strong></div>
-      <span class="market-data-status">U.S. stocks · Quotes may be delayed</span>
+<header class="nav" role="banner">
+  <div class="nav-in">
+    <a class="brand" href="#today" aria-label="The AI Daily — home">
+      <svg class="brand-mark" viewBox="0 0 60 60" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="aid-mark-left" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#f04ca5"/><stop offset="48%" stop-color="#956aff"/><stop offset="100%" stop-color="#428dff"/></linearGradient>
+          <linearGradient id="aid-mark-right" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#587dff"/><stop offset="100%" stop-color="#1fe0df"/></linearGradient>
+        </defs>
+        <path d="M9 51 25.8 9.5c1.8-4.2 5.6-6.5 9.3-5.7 2.6.5 4.3 1.9 5.8 4.7L26.3 46.2c-1.8 4.6-4.6 5.6-9.6 5.6Z" fill="url(#aid-mark-left)"/>
+        <path d="M30 7.5c3.6-4.9 9.1-4.1 12.2 2.7L58 51.2H43.2L29 14.4c-.8-2.2-1.1-4.1 1-6.9Z" fill="url(#aid-mark-right)"/>
+      </svg>
+      <span class="brand-words"><strong>The <span class="brand-ai">AI</span> Daily</strong><small>AI · TECH · STARTUPS · MARKETS</small></span>
+    </a>
+    <span class="spacer"></span>
+    <div class="head-actions">
+      <a class="icon" href="https://www.instagram.com/readtheaidaily/" target="_blank" rel="noopener noreferrer" aria-label="Follow The AI Daily on Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <button class="icon" data-act="search" aria-label="Search stories" title="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button>
+      <button class="icon" data-act="prefs" aria-label="Preferences" title="Preferences"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button>
+      <a class="podcast-link" href="#today" data-jump="podcast" aria-label="Go to The AI Daily podcast"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.2 14V12a7.8 7.8 0 0 1 15.6 0v2"/><path d="M4.2 13.4h2.2v6.2H4.8a2 2 0 0 1-2-2v-2.2a2 2 0 0 1 1.4-2ZM19.8 13.4h-2.2v6.2h1.6a2 2 0 0 0 2-2v-2.2a2 2 0 0 0-1.4-2Z"/></svg><span>Podcast</span></a>
     </div>
-    <div class="market-strip-tape">
-      <!-- Official TradingView Ticker Tape. Quotes come directly from TradingView; no price values are stored on this website. -->
-      <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
-        <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/stocks-usa/" target="_blank" rel="noopener nofollow noreferrer">Market quotes</a> by TradingView</div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-{
-  "symbols": [
-    {
-      "proName": "NASDAQ:NVDA",
-      "title": "NVIDIA"
-    },
-    {
-      "proName": "NASDAQ:AMD",
-      "title": "AMD"
-    },
-    {
-      "proName": "NASDAQ:PLTR",
-      "title": "Palantir"
-    },
-    {
-      "proName": "NASDAQ:MSFT",
-      "title": "Microsoft"
-    },
-    {
-      "proName": "NASDAQ:GOOGL",
-      "title": "Alphabet"
-    },
-    {
-      "proName": "NASDAQ:AMZN",
-      "title": "Amazon"
-    },
-    {
-      "proName": "NASDAQ:META",
-      "title": "Meta"
-    },
-    {
-      "proName": "NYSE:AI",
-      "title": "C3.ai"
-    },
-    {
-      "proName": "NASDAQ:SOUN",
-      "title": "SoundHound"
-    },
-    {
-      "proName": "NYSE:BBAI",
-      "title": "BigBear.ai"
-    },
-    {
-      "proName": "NASDAQ:TEM",
-      "title": "Tempus AI"
-    },
-    {
-      "proName": "NASDAQ:CRWV",
-      "title": "CoreWeave"
-    }
-  ],
-  "showSymbolLogo": true,
-  "colorTheme": "dark",
-  "isTransparent": true,
-  "displayMode": "adaptive",
-  "locale": "en"
-}
-        </script>
-      </div>
-    </div>
-    <div class="market-strip-note">
-      <span>Actual market-provider quotes. Prices may be delayed or unavailable; not guaranteed real-time or investment advice.</span>
-      <a href="https://www.tradingview.com/markets/stocks-usa/" target="_blank" rel="noopener noreferrer">View market data ↗</a>
-    </div>
-    <noscript><p class="market-strip-note">JavaScript is required to display market quotations. <a href="https://www.tradingview.com/markets/stocks-usa/">Open the source</a>.</p></noscript>
   </div>
+  <nav class="mast-nav" aria-label="Main navigation">
+    <a href="#today" data-route="today" aria-current="page">Home</a>
+    <a href="#ai" data-route="ai">News</a>
+    <a href="#videos" data-route="videos">Videos</a>
+    <a href="#today" data-jump="markets">Markets</a>
+    <a href="#today" data-jump="about">About</a>
+  </nav>
+</header>
+<section id="ai-market-tape" class="market-strip" aria-label="AI company stock market quotations provided by TradingView">
+  <div class="market-strip-tape">
+    <tv-ticker-tape theme="dark" transparent hide-chart item-size="compact"
+      symbols="NASDAQ:NVDA,NASDAQ:AMD,NASDAQ:PLTR,NASDAQ:MSFT,NASDAQ:GOOGL,NASDAQ:AMZN,NASDAQ:META,NYSE:AI,NASDAQ:SOUN,NYSE:BBAI,NASDAQ:TEM,NASDAQ:CRWV"
+      aria-label="Market quotations for twelve artificial intelligence companies">
+      <span class="market-loading">Loading verified market quotes…</span>
+    </tv-ticker-tape>
+  </div>
+  <p class="market-source">U.S. stocks · Quotes may be delayed · Source: <a href="https://www.tradingview.com/markets/stocks-usa/" target="_blank" rel="noopener nofollow noreferrer">TradingView</a></p>
+  <noscript><p class="market-strip-noscript">Market quotes require JavaScript. <a href="https://www.tradingview.com/markets/stocks-usa/">Open TradingView</a>.</p></noscript>
 </section>
+<script type="module" src="https://widgets.tradingview-widget.com/w/en/tv-ticker-tape.js"></script>
 <div class="wrap top">
   <p class="eyebrow" id="today"></p>
   <h1 class="ptitle" id="ptitle">Today</h1>
@@ -550,8 +556,8 @@ main{padding-top:12px;padding-bottom:85px}
 </div>
 <nav class="strip" aria-label="Sections"><div class="strip-in" id="strip"></div></nav>
 <main class="wrap" id="view"></main>
-<footer class="site-footer" aria-label="About The AI Daily">
-  <div><strong>The <span style="color:#a48dff">AI</span> Daily.</strong><p>Signals from AI, technology and startups. Explore original reporting from the publishers behind each story.</p></div>
+<footer class="site-footer" id="site-about" aria-label="About The AI Daily">
+  <div><strong>The <span class="brand-ai">AI</span> Daily.</strong><p>Signals from AI, technology and startups. Explore original reporting from the publishers behind each story.</p></div>
   <a href="https://www.instagram.com/readtheaidaily/" target="_blank" rel="noopener noreferrer" aria-label="Follow The AI Daily on Instagram">Follow @readtheaidaily <span aria-hidden="true">↗</span></a>
 </footer>
 <nav class="tabs" aria-label="Quick navigation" id="tabs"></nav>
@@ -560,6 +566,24 @@ main{padding-top:12px;padding-bottom:85px}
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="s-title" hidden></div>
 <div class="toast" id="toast" role="status" hidden></div>
 
+<script>
+/* Scroll-only actions for the masthead; they do not change the article route. */
+document.addEventListener('click',function(ev){
+  var link=ev.target.closest('[data-jump]');
+  if(!link) return;
+  ev.preventDefault();
+  var name=link.getAttribute('data-jump');
+  var jump=function(){
+    var sel=name==='podcast' ? '.pod' : name==='about' ? '#site-about' : '#ai-market-tape';
+    var node=document.querySelector(sel);
+    if(node) node.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  if(name==='podcast' && location.hash!=='#today'){
+    location.hash='today';
+    setTimeout(jump,90);
+  }else jump();
+});
+</script>
 <script src="data/edition.js"></script>
 <script>
 (function(){
@@ -834,6 +858,10 @@ function header(){
   st.innerHTML = '<span><span class="dot'+(stale?" stale":"")+'"></span>Updated '+esc(fmt(new Date(ED.generatedAt),{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))+'</span>'+next;
 }
 function nav(){
+  document.querySelectorAll(".mast-nav [data-route]").forEach(function(a){
+    if(a.getAttribute("data-route")===route) a.setAttribute("aria-current","page");
+    else a.removeAttribute("aria-current");
+  });
   document.getElementById("strip").innerHTML = ROUTES.map(function(r){ return '<a href="#'+r[0]+'"'+(r[0]===route?' aria-current="page"':'')+'>'+esc(r[1])+(r[0]==="saved"&&state.saved.length?" ("+state.saved.length+")":"")+'</a>'; }).join("");
   document.getElementById("tabs").innerHTML = TABS.map(function(r){ return '<a href="#'+r[0]+'"'+(r[0]===route?' aria-current="page"':'')+'><svg viewBox="0 0 24 24" aria-hidden="true">'+r[2]+'</svg><span>'+esc(r[1])+'</span></a>'; }).join("");
   var cur = document.querySelector("#strip [aria-current]"); if(cur && cur.scrollIntoView) { try { cur.scrollIntoView({block:"nearest",inline:"center"}); } catch(e){} }
