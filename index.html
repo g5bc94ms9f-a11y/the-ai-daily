@@ -50,6 +50,24 @@ h1,h2,h3{text-wrap:balance;font-weight:700;letter-spacing:-.025em}
 .icon:hover{background:var(--surface2)}
 .icon svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 
+/* AI Markets — official TradingView feed; intentionally no fabricated quotes */
+.market-strip{position:relative;z-index:2;color:#f5f5f7;background:linear-gradient(135deg,#0a0b10 0%,#11131d 53%,#08090d 100%);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.13)}
+.market-strip-inner{max-width:1120px;margin:0 auto;padding:16px 20px 10px}
+.market-strip-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 20px;margin:0 0 9px}
+.market-strip-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.market-strip-title strong{font-size:12px;line-height:1.2;letter-spacing:.15em;font-weight:800;text-transform:uppercase;color:#f5f5f7}
+.market-strip-title .market-dot{display:inline-block;width:6px;height:6px;flex:none;border-radius:50%;background:#8894ff;box-shadow:0 0 11px rgba(146,133,255,.8)}
+.market-data-status{font-size:11px;font-weight:600;color:#b8b8c3;letter-spacing:.02em}
+.market-strip-tape{width:100%;min-height:72px;overflow:hidden;border-radius:15px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07)}
+.market-strip-tape .tradingview-widget-container{width:100%;min-height:66px}
+.market-strip-tape .tradingview-widget-container__widget{width:100%;min-height:56px}
+.market-strip-tape .tradingview-widget-copyright{font-size:10px;color:#aeb1bd;text-align:right;padding:0 12px 7px}
+.market-strip-tape .tradingview-widget-copyright a{color:#c9c8ff;text-decoration:none}
+.market-strip-tape .tradingview-widget-copyright a:hover{text-decoration:underline}
+.market-strip-note{font-size:11px;line-height:1.45;color:#a9aaba;padding-top:9px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.market-strip-note a{color:#d6d4ff;text-decoration:underline;text-decoration-color:rgba(214,212,255,.4);text-underline-offset:2px}
+@media(max-width:600px){.market-strip-inner{padding:13px 14px 11px}.market-strip-heading{gap:4px}.market-strip-note{font-size:10px}.market-strip-title strong{font-size:11px}}
+
 /* Page title */
 .top{padding-top:26px}
 .eyebrow{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
@@ -445,6 +463,85 @@ main{padding-top:12px;padding-bottom:85px}
    <button class="icon" data-act="search" aria-label="Search stories"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button>
   <button class="icon" data-act="prefs" aria-label="Preferences"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button>
 </div></header>
+<section class="market-strip" aria-label="AI stocks — TradingView market quotations">
+  <div class="market-strip-inner">
+    <div class="market-strip-heading">
+      <div class="market-strip-title"><span class="market-dot" aria-hidden="true"></span><strong>AI Markets</strong></div>
+      <span class="market-data-status">U.S. stocks · Quotes may be delayed</span>
+    </div>
+    <div class="market-strip-tape">
+      <!-- Official TradingView Ticker Tape. Quotes come directly from TradingView; no price values are stored on this website. -->
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/stocks-usa/" target="_blank" rel="noopener nofollow noreferrer">Market quotes</a> by TradingView</div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+{
+  "symbols": [
+    {
+      "proName": "NASDAQ:NVDA",
+      "title": "NVIDIA"
+    },
+    {
+      "proName": "NASDAQ:AMD",
+      "title": "AMD"
+    },
+    {
+      "proName": "NASDAQ:PLTR",
+      "title": "Palantir"
+    },
+    {
+      "proName": "NASDAQ:MSFT",
+      "title": "Microsoft"
+    },
+    {
+      "proName": "NASDAQ:GOOGL",
+      "title": "Alphabet"
+    },
+    {
+      "proName": "NASDAQ:AMZN",
+      "title": "Amazon"
+    },
+    {
+      "proName": "NASDAQ:META",
+      "title": "Meta"
+    },
+    {
+      "proName": "NYSE:AI",
+      "title": "C3.ai"
+    },
+    {
+      "proName": "NASDAQ:SOUN",
+      "title": "SoundHound"
+    },
+    {
+      "proName": "NYSE:BBAI",
+      "title": "BigBear.ai"
+    },
+    {
+      "proName": "NASDAQ:TEM",
+      "title": "Tempus AI"
+    },
+    {
+      "proName": "NASDAQ:CRWV",
+      "title": "CoreWeave"
+    }
+  ],
+  "showSymbolLogo": true,
+  "colorTheme": "dark",
+  "isTransparent": true,
+  "displayMode": "adaptive",
+  "locale": "en"
+}
+        </script>
+      </div>
+    </div>
+    <div class="market-strip-note">
+      <span>Actual market-provider quotes. Prices may be delayed or unavailable; not guaranteed real-time or investment advice.</span>
+      <a href="https://www.tradingview.com/markets/stocks-usa/" target="_blank" rel="noopener noreferrer">View market data ↗</a>
+    </div>
+    <noscript><p class="market-strip-note">JavaScript is required to display market quotations. <a href="https://www.tradingview.com/markets/stocks-usa/">Open the source</a>.</p></noscript>
+  </div>
+</section>
 <div class="wrap top">
   <p class="eyebrow" id="today"></p>
   <h1 class="ptitle" id="ptitle">Today</h1>
