@@ -32,6 +32,9 @@ MIN_STORIES = 4
 FEEDS = [
     ('OpenAI', 'https://openai.com/news/rss.xml', 'AI Companies', 'ai', True),
     ('Google DeepMind', 'https://deepmind.google/blog/rss.xml', 'AI Companies', 'ai', True),
+    ('Google Gemini', 'https://blog.google/products-and-platforms/products/gemini/rss/', 'AI Companies', 'ai', True),
+    ('Google AI', 'https://blog.google/technology/ai/rss/', 'AI Companies', 'ai', True),
+    ('Hugging Face', 'https://huggingface.co/blog/feed.xml', 'AI Companies', 'ai', True),
     ('NVIDIA', 'https://blogs.nvidia.com/feed/', 'AI Companies', 'ai', True),
     ('The Verge', 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml', 'Technology Publications', 'ai', False),
     ('Ars Technica', 'https://arstechnica.com/ai/feed/', 'Technology Publications', 'ai', False),
@@ -40,19 +43,19 @@ FEEDS = [
     ('MIT News', 'https://news.mit.edu/rss/topic/artificial-intelligence2', 'Technology Publications', 'ai', True),
     ('The Decoder', 'https://the-decoder.com/feed/', 'Technology Publications', 'ai', False),
     ('Crunchbase News', 'https://news.crunchbase.com/feed/', 'Startups & Venture Capital', 'vc', False),
+    ('TechCrunch AI', 'https://techcrunch.com/category/artificial-intelligence/feed/', 'Technology Publications', 'ai', False),
+    ('TechCrunch Startups', 'https://techcrunch.com/category/startups/feed/', 'Startups & Entrepreneurship', 'startups', False),
+    ('TechCrunch Venture', 'https://techcrunch.com/category/venture/feed/', 'Startups & Venture Capital', 'vc', False),
+    ('Y Combinator', 'https://www.ycombinator.com/blog/rss/', 'Startups & Entrepreneurship', 'startups', False),
     ('Artificial Lawyer', 'https://www.artificiallawyer.com/feed/', 'AI & Business', 'business', False),
     ('LawSites', 'https://www.lawsitesblog.com/feed', 'AI & Business', 'business', False),
     ('Google News · Anthropic', 'https://news.google.com/rss/search?q=Anthropic+Claude+when%3A7d&hl=en-US&gl=US&ceid=US%3Aen', 'AI Companies', 'ai', False),
 ]
 DIRECT = [
     ('Anthropic', 'https://www.anthropic.com/news', 'AI Companies', 'Company news page; Google News stories are collected separately'),
-    ('Google Gemini', 'https://blog.google/products/gemini/', 'AI Companies', 'Company news page'),
     ('Microsoft', 'https://blogs.microsoft.com/', 'AI Companies', 'Company news page'),
     ('Meta AI', 'https://ai.meta.com/blog/', 'AI Companies', 'Company news page'),
-    ('Hugging Face', 'https://huggingface.co/blog', 'AI Companies', 'Company blog'),
-    ('TechCrunch AI', 'https://techcrunch.com/category/artificial-intelligence/', 'Technology Publications', 'Direct link; RSS terms restrict modifying feed content'),
     ('VentureBeat AI', 'https://venturebeat.com/category/ai/', 'Technology Publications', 'Direct link; legacy AI feed may not update'),
-    ('Y Combinator', 'https://www.ycombinator.com', 'Startups & Entrepreneurship', 'Startup accelerator and company news'),
     ('Startup Stealth', 'https://startupstealth.com', 'Startups & Entrepreneurship', 'Original magazine source; direct link only'),
     ('Startup Ideas', 'https://startup-ideas.com', 'Startups & Entrepreneurship', 'Original magazine source; direct link only'),
     ('Early Startup Days', 'https://www.earlystartupdays.com/subscribe', 'Startups & Entrepreneurship', 'Original magazine source; direct link only'),
@@ -67,7 +70,7 @@ DIRECT = [
 
 BUSINESS = re.compile(r'\b(law|legal|lawyer|finance|financial|fund|bank|business|enterprise|corporate|workplace|productivity|workforce|office|accounting|compliance|contract|insurance|fintech|investment|investor|earnings|revenue|market|economy)\b', re.I)
 VENTURE = re.compile(r'\b(raise[ds]?|raised|raising|fundrais\w*|round|valuation|valued|investor|investment|invested|venture|vc|ipo|startup|founder|seed|series [a-f]|acquisition|acquire[ds]?|merger|capital|backed|funding|unicorn)\b', re.I)
-STARTUP = re.compile(r'\b(startup|founder|launch|launched|accelerator|entrepreneur|yc|y combinator|small business)\b', re.I)
+STARTUP = re.compile(r'\b(startup|founder|founding|launch|launched|accelerator|entrepreneur|yc|y combinator|small business)\b', re.I)
 AI = re.compile(r'\b(ai|artificial intelligence|llm|language model|agentic|ai agent|chatgpt|openai|anthropic|claude|gemini|deepmind|nvidia|machine learning|generative|neural|inference|copilot|gpt[- ]?\d|robotics|transformer|hugging face)\b', re.I)
 COMPANIES = {'OpenAI':r'\bopenai\b|\bchatgpt\b|\bgpt\b', 'Anthropic':r'\banthropic\b|\bclaude\b', 'Google Gemini':r'\bgemini\b', 'DeepMind':r'\bdeepmind\b', 'Microsoft':r'\bmicrosoft\b|\bcopilot\b', 'Meta':r'\bmeta\b|\bllama\b', 'NVIDIA':r'\bnvidia\b', 'Apple':r'\bapple\b|\bsiri\b'}
 GLOSSARY = [
@@ -192,16 +195,20 @@ def extract(feed):
         d=date_parse(raw_date)
         if not title or not valid_http_link(link) or not d: continue
         if d < EARLIEST or d > NOW + timedelta(hours=6): continue
-        if not (official or AI.search(title+' '+desc) or VENTURE.search(title) or (preferred=='business' and BUSINESS.search(title))):
+        relevant_desc=re.sub(r'\b(?:not|wasn.t|isn.t|unrelated to|without)\s+(?:(?:a|an|the|caused by|a cyberattack or)\s+)?AI\b', ' ', desc, flags=re.I)
+        if not (official or AI.search(title+' '+relevant_desc) or VENTURE.search(title) or (preferred=='business' and BUSINESS.search(title)) or (preferred=='startups' and STARTUP.search(title+' '+desc))):
             continue
         # Avoid unrelated NVIDIA consumer hardware/gaming content.
         if name=='NVIDIA' and not AI.search(title+' '+desc[:160]): continue
         if name=='Crunchbase News' and not (AI.search(title+' '+desc) or VENTURE.search(title)): continue
         summary=teaser(desc,title)
         section=section_for(title,desc,preferred)
+        if name=='Y Combinator' and not VENTURE.search(title): section='startups'
+        if name=='TechCrunch Startups' and not VENTURE.search(title): section='startups'
+        if name=='TechCrunch Venture' and VENTURE.search(title): section='vc'
         if preferred=='business' and BUSINESS.search(title+' '+desc[:100]): section='business'
         company=[n for n,p in COMPANIES.items() if re.search(p,title+' '+desc[:160],re.I)]
-        if name in ('OpenAI','Google DeepMind','NVIDIA') and not company: company=[name]
+        if official and not company: company=[name]
         topics=['ai']
         if section in ('vc','startups'): topics += [section, 'founders']
         if section=='business': topics+=['law-finance']
@@ -223,24 +230,43 @@ def extract(feed):
         })
     return story[:12]
 
+def editorial_cluster(item):
+    """Group coverage of the same event without collapsing every story about a company."""
+    title=item['title'].lower()
+    if ('jensen huang' in title or 'nvidia' in title) and re.search(r'\b(resign|ouster|scandal|affair|departure|founder fairy|founder ceo|crisis|showman|stake|defending|rivals cash)\b',title):
+        return 'nvidia-huang-departure'
+    if 'chatgpt wallet' in title: return 'chatgpt-wallet'
+    if re.search(r'\banthropic\b',title) and re.search(r'\bipo\b|initial public offering|roadshow',title): return 'anthropic-ipo'
+    if 'microsoft 365' in title and 'outage' in title: return 'microsoft-outage'
+    if 'gemini 4 carbon' in title and 'matharena' in title: return 'gemini-matharena'
+    if 'gemini 4 hydrogen' in title and 'search' in title: return 'gemini-search-hydrogen'
+    return None
+
+
 def pick_stories(entries):
-    # Deduplicate title despite multiple publishers covering the same headline.
-    seen=set(); unique=[]; per_source={}
+    """Balance sources and sections; cap obvious cross-publisher event duplication."""
+    seen=set(); unique=[]; per_source={}; per_event={}
     for item in sorted(entries,key=lambda s:s['date'],reverse=True):
         fingerprint = re.sub(r'[^a-z0-9]+',' ',item['title'].lower()).strip()
-        if fingerprint in seen or per_source.get(item['source'],0)>=7: continue
+        event=editorial_cluster(item)
+        if fingerprint in seen or per_source.get(item['source'],0)>=5: continue
+        if event and per_event.get(event,0)>=2: continue
+        # Avoid one publication dominating the edition on slow news days.
         seen.add(fingerprint); unique.append(item)
         per_source[item['source']]=per_source.get(item['source'],0)+1
-    # Balance business, startups, VC and core AI stories.
+        if event: per_event[event]=per_event.get(event,0)+1
     groups={k:[] for k in ('ai','business','vc','startups')}
-    for s in unique: groups[s['section']].append(s)
+    for story in unique: groups.setdefault(story['section'],groups['ai']).append(story)
     chosen=[]; used=set()
-    for section in ('ai','business','vc','startups'):
-        for s in groups[section][:5 if section=='ai' else 4]:
-            if s['id'] not in used: chosen.append(s); used.add(s['id'])
-    for s in unique:
+    # Prefer diversity even on weeks dominated by AI model announcements.
+    for section,minimum in [('ai',8),('business',5),('vc',6),('startups',5)]:
+        for story in groups[section][:minimum]:
+            if story['id'] not in used:
+                chosen.append(story);used.add(story['id'])
+    for story in unique:
         if len(chosen)>=MAX_STORIES: break
-        if s['id'] not in used: chosen.append(s); used.add(s['id'])
+        if story['id'] not in used:
+            chosen.append(story);used.add(story['id'])
     return sorted(chosen,key=lambda s:s['date'],reverse=True)[:MAX_STORIES]
 
 def make_english(stories):
@@ -303,27 +329,35 @@ def make_podcast(brief):
     return {'title':'The AI Daily Audio Briefing','blurb':'Listen to publisher headlines and short excerpts in American English.','hosts':['Maya','Ben'],'lines':lines}
 
 def sources_for(ok,error):
-    """Keep every original source link chosen for The AI Daily preview."""
+    """Report collector status honestly, including configured-but-unavailable feeds."""
     catalog = json.loads((ROOT/'data'/'source_catalog.json').read_text(encoding='utf-8'))
     by_group={g['group']:[] for g in catalog}
+    feed_index={n:(url,group) for n,url,group,_,_ in FEEDS}
     used=set()
+    def source_item(name,url):
+        if name not in feed_index:
+            return {'name':name,'url':url,'mode':'link',
+                    'note':'Reading link only. Not automatically collected in the daily edition.'}
+        mode=('edition' if name in ok else 'failed' if name in error else 'empty')
+        note={'edition':'RSS collected in this edition; article content not independently verified',
+              'failed':'RSS collection failed in the latest edition; news coverage may be incomplete',
+              'empty':'RSS source checked; no eligible recent stories in this edition'}[mode]
+        if name.startswith('Google News'):note+='; aggregated feed, not the original publisher'
+        return {'name':name,'url':url,'mode':mode,'note':note}
     for group in catalog:
         for item in group['items']:
             name=item['name']
-            if name in used: continue
+            if name in used:continue
             used.add(name)
-            status='Checked via publisher feed in the latest update' if name in ok else 'Direct site link; not automatically checked'
-            by_group[group['group']].append({'name':name,'url':item['url'], 'mode':'edition' if name in ok else 'link', 'note':status})
+            by_group[group['group']].append(source_item(name,item['url']))
     for name,url,group,_,_ in FEEDS:
-        if name in used: continue
+        if name in used:continue
         used.add(name)
-        note='Included in this update' if name in ok else ('Feed failed this update' if name in error else 'No eligible recent stories in this update')
-        if name.startswith('Google News'):note+='; aggregator, not the original publisher'
-        by_group.setdefault(group,[]).append({'name':name,'url':url,'mode':'edition' if name in ok else 'link','note':note})
+        by_group.setdefault(group,[]).append(source_item(name,url))
     for name,url,group,note in DIRECT:
-        if name in used: continue
+        if name in used:continue
         used.add(name)
-        by_group.setdefault(group,[]).append({'name':name,'url':url,'mode':'link','note':note})
+        by_group.setdefault(group,[]).append(source_item(name,url))
     return [{'group':group,'items':items} for group,items in by_group.items()]
 
 def make_edition(entries,ok,error):
@@ -341,9 +375,9 @@ def make_edition(entries,ok,error):
     ai_top=[s['id'] for s in stories if s['section']=='ai'][:5]
     sorted_brief=[next(s for s in stories if s['id']==i) for i in briefing]
     notes=[
-        'Automatically collected from RSS/Atom feeds shown under My Sources. Most titles/excerpts come from publishers; Google News results are labeled as aggregator feeds. The AI Daily does not independently verify or summarize full articles.',
+        'Collected from RSS/Atom publisher feeds and labeled news aggregators. Titles and short excerpts originate with those feeds; the site does not independently verify the claims in full articles.',
         'The edition is refreshed daily; articles may be several days old, especially on weekends. Check publication dates and original links.',
-        'Audio and English exercises are generated from available headlines/excerpts. This edition does not use a paid AI summarization service.'
+        'Audio and English exercises use publisher headline/excerpt metadata; the podcast script receives an automated factual-consistency review, not a human editorial review.'
     ]
     if error:notes.append(f'{len(error)} feed(s) were unavailable for this update: '+', '.join(sorted(error))+'.')
     scheduled = datetime.combine(NOW.date(), time(9, 17), tzinfo=timezone.utc)
