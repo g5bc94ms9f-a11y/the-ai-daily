@@ -16,35 +16,35 @@
     ],
     [
       0,
-      "Let's start with Google News · Anthropic. The headline is: Anthropic | History, Controversies, & Claude AI - Britannica."
+      "Let's start with The Decoder. The headline is: OCR models now digitize a million pages for under $130 as costs drop fivefold in 18 months."
     ],
     [
       1,
-      "According to the publisher's excerpt, Anthropic | History, Controversies, & Claude AI Britannica"
+      "According to the publisher's excerpt, Pulling text out of scanned books and records has gotten a lot cheaper with freely available AI models. The article…"
     ],
     [
       0,
-      "That brings us to Google News · Anthropic, which has this headline: Anthropic IPO: how can I buy shares, and is it worth it? - The Guardian."
+      "That brings us to Google News · Anthropic, which has this headline: Anthropic IPO: $83 Share Price and Year-End Valuation Odds - Time Magazine."
     ],
     [
       1,
-      "According to the publisher's excerpt, Anthropic IPO: how can I buy shares, and is it worth it? The Guardian"
+      "According to the publisher's excerpt, Anthropic IPO: $83 Share Price and Year-End Valuation Odds Time Magazine"
     ],
     [
       0,
-      "Next up, Ars Technica reports: Copilot is \"the new OS for work,\" and now Office runs inside of it."
+      "Next up, LawSites reports: OpenAI Opens Astra for Law to All ChatGPT Enterprise Customers and Releases New Benchmark Results."
     ],
     [
       1,
-      "According to the publisher's excerpt, Word, Excel, and PowerPoint now live inside Copilot; always-on agents are next."
+      "According to the publisher's excerpt, In September, OpenAI joined other frontier models that have been moving into the legal field, including Anthropic and Google, and…"
     ],
     [
       0,
-      "And our fourth story is from TechCrunch AI: Nvidia’s startup stakes ballooned to $65B, but Huang’s exit puts future deals in doubt."
+      "And our fourth story is from Google News · Anthropic: Anthropic valued at $1.5 trillion ahead of AI giant's stock market debut - BBC."
     ],
     [
       1,
-      "According to the publisher's excerpt, The value of Nvidia’s private investments has nearly tripled over the past nine months, fueled by Jensen Huang’s aggressive dealmaking…"
+      "According to the publisher's excerpt, Anthropic valued at $1.5 trillion ahead of AI giant's stock market debut BBC"
     ],
     [
       0,
@@ -55,7 +55,7 @@
       "Exactly. And look into means investigate further. Follow the original reporting for context. See you in the next edition."
     ]
   ],
-  "audioUrl": "audio/today.mp3?v=20261118102629",
-  "publishedAt": "2026-11-18T10:26:29.283938+00:00",
+  "audioUrl": "audio/today.mp3?v=20261119102909",
+  "publishedAt": "2026-11-19T10:29:09.238871+00:00",
   "note": "AI voices reading a conservative two-host script grounded only in publisher feed excerpts. Full article claims were not independently verified."
 }
